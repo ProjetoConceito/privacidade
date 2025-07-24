@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade - Conceituar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+    a {
+      color: #2b6eff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Política de Privacidade</h1>
+  <div id="content">Carregando...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    fetch('README.md')
+      .then(res => res.text())
+      .then(text => {
+        document.getElementById('content').innerHTML = marked.parse(text);
+      })
+      .catch(err => {
+        document.getElementById('content').innerText = "Erro ao carregar o README.md.";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
 
