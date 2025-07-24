@@ -6,34 +6,83 @@
   <title>Política de Privacidade - Conceituar</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background-color: #f4f4f4;
-      color: #222;
+      background: #f5f5f5;
+      font-family: 'Georgia', serif;
+      padding: 2rem;
+      margin: 0;
+      line-height: 1.6;
+      color: #333;
     }
+
+    .document-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 3rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.3rem;
+      margin-top: 2rem;
+      color: #2b6eff;
+    }
+
     a {
       color: #2b6eff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    code {
+      background: #eee;
+      padding: 0.2rem 0.4rem;
+      font-family: monospace;
+      border-radius: 4px;
+    }
+
+    blockquote {
+      border-left: 4px solid #ccc;
+      margin: 1.5em 0;
+      padding-left: 1em;
+      color: #555;
+      background: #fafafa;
+    }
+
+    ul {
+      margin-left: 1.5rem;
     }
   </style>
 </head>
 <body>
-  <h1>Política de Privacidade</h1>
-  <div id="content">Carregando...</div>
+  <div class="document-container">
+    <div id="content">Carregando política de privacidade...</div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     fetch('README.md')
-      .then(res => res.text())
-      .then(text => {
-        document.getElementById('content').innerHTML = marked.parse(text);
+      .then(response => {
+        if (!response.ok) throw new Error('Falha ao carregar README.md');
+        return response.text();
       })
-      .catch(err => {
-        document.getElementById('content').innerText = "Erro ao carregar o README.md.";
-        console.error(err);
+      .then(markdown => {
+        document.getElementById('content').innerHTML = marked.parse(markdown);
+      })
+      .catch(error => {
+        document.getElementById('content').innerHTML = "<p>Erro ao carregar o conteúdo.</p>";
+        console.error(error);
       });
   </script>
 </body>
 </html>
-
